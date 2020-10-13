@@ -58,6 +58,9 @@ export class Hello extends React.Component {
             <h1>Welcome to React!!</h1>
         );
     }
+  render() {
+    return (pt.given_name);
+  }
 }
 
 ReactDOM.render(<Hello />, document.getElementById('root'));
