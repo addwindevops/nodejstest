@@ -114,6 +114,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
+	
+var Hello = /** @class */ (function (_super) {
+    __extends(Hello, _super);
+    function Hello() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Hello.prototype.render = function () {
+        return (React.createElement("h1", null, "Welcome to the first test app"));
+    };
 
 (function(window){
   window.extractData = function() {
@@ -246,19 +255,11 @@ var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/in
   };
 
 })(window);
-	
-var Hello = /** @class */ (function (_super) {
-    __extends(Hello, _super);
-    function Hello() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Hello.prototype.render = function () {
-        return (React.createElement("h1", null, "Welcome to the test app"));
-    };
     return Hello;
+return defaultPatient;
 }(React.Component));
 exports.Hello = Hello;
-export default defaultPatient;
+	
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
 
 /***/ }),
