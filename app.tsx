@@ -55,12 +55,9 @@ FHIR.oauth2.ready(function(smart){
 export class Hello extends React.Component {
     render() {
         return (
-            <h1>Welcome to React!!</h1>
+            <h1>Welcome to React!! { pt.given_name }</h1>
         );
     }
-  render() {
-    return (pt.given_name);
-  }
 }
 
 ReactDOM.render(<Hello />, document.getElementById('root'));
