@@ -113,18 +113,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var Hello = /** @class */ (function (_super) {
-    __extends(Hello, _super);
-    function Hello() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Hello.prototype.render = function () {
-        return (React.createElement("h1", null, "Welcome to React!! Testing in App Bundle"));
-    };
-    return Hello;
-}(React.Component));
-exports.Hello = Hello;
-ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
+
 
 (function(window){
   window.extractData = function() {
@@ -257,6 +246,57 @@ ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'
   };
 
 })(window);
+	
+var Hello = /** @class */ (function (_super) {
+    __extends(Hello, _super);
+    function Hello() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Hello.prototype.render = function () {
+        return (React.createElement("h1", null, "Welcome to the test app"));
+    };
+    return Hello;
+}(React.Component));
+exports.Hello = Hello;
+ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
+
+        <script type="text/javascript">
+            FHIR.oauth2.ready().then(function(client) {
+
+                // Render the current patient (or any error)
+                client.patient.read().then(
+                    function(pt) {
+                        document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                    },
+                    function(error) {
+                        document.getElementById("patient").innerText = error.stack;
+                    }
+                );
+
+                // Get MedicationRequests for the selected patient
+                client.request("/MedicationRequest?patient=" + client.patient.id, {
+                    resolveReferences: [ "medicationReference" ],
+                    graph: true
+                })
+
+                // Reject if no MedicationRequests are found
+                .then(function(data) {
+                    if (!data.entry || !data.entry.length) {
+                        throw new Error("No medications found for the selected patient");
+                    }
+                    return data.entry;
+                })
+     // Render the current patient's medications (or any error)
+                .then(
+                    function(meds) {
+                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                    },
+                    function(error) {
+                        document.getElementById("meds").innerText = error.stack;
+                    }
+                );
+                   }).catch(console.error);
+        </script>	
 
 /***/ }),
 
