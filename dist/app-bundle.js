@@ -258,6 +258,7 @@ var Hello = /** @class */ (function (_super) {
     return Hello;
 }(React.Component));
 exports.Hello = Hello;
+export default defaultPatient;
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
 
 /***/ }),
