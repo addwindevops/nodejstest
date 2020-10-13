@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>App Launch</title>
+    <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
+</head>
+<body>
+    <script src="./node_module/fhirclient/build/fhir-client.js"></script>
+    <script>
+        FHIR.oauth2.authorize({
+            "client_id": "1adc99e2-e799-47e3-97dc-f3fc61fa903d",
+            "scope": "launch openid fhirUser patient/*.read",
+            redirectUri: "index.html"
+        });
+    </script>
+</body>
+</html>
