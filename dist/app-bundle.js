@@ -258,7 +258,6 @@ var Hello = /** @class */ (function (_super) {
     return Hello;
 }(React.Component));
 exports.Hello = Hello;
-exports.fname = fname;
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
 
 /***/ }),
