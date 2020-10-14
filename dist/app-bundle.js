@@ -121,71 +121,10 @@ var Hello = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Hello.prototype.render = function () {
-        return (React.createElement("h1", null, "Welcome to the first test app"));
+        return (React.createElement("h1", null, "Test 1 on 10/14"));
     };
-
-(function(window){
-  window.extractData = function() {
-    var ret = $.Deferred();
-
-    function onError() {
-      console.log('Loading error', arguments);
-      ret.reject();
-    }
-
-    function onReady(smart)  {
-      if (smart.hasOwnProperty('patient')) {
-        var patient = smart.patient;
-        var pt = patient.read();
-        var obv = smart.patient.api.fetchAll({
-                    type: 'Observation',
-                    query: {
-                      code: {
-                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                      }
-                    }
-                  });
-
-          var gender = patient.gender;
-          var fname = '';
-          var lname = '';
-
-          if (typeof patient.name[0] !== 'undefined') {
-            fname = patient.name[0].given.join(' ');
-            lname = patient.name[0].family.join(' ');
-          }
-
-          var p = defaultPatient();
-          p.gender = gender;
-          p.fname = fname;
-          p.lname = lname;
-
-          ret.resolve(p);
-        });
-      } else {
-        onError();
-      }
-    }
-
-    FHIR.oauth2.ready(onReady, onError);
-    return ret.promise();
-
-  };
-
-  function defaultPatient(){
-    return {
-      fname: {value: ''},
-      lname: {value: ''},
-      gender: {value: ''},
-  }
-  };
-
-})(window);
 	
     return Hello;
-return fname;
 }(React.Component));
 exports.Hello = Hello;
 	
