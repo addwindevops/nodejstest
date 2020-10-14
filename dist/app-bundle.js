@@ -108,27 +108,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
-	
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-
-	
 var Hello = /** @class */ (function (_super) {
     __extends(Hello, _super);
     function Hello() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Hello.prototype.render = function () {
-        return (React.createElement("h1", null, "Test 1 on 10/14"));
+        return (React.createElement("h1", null, "Welcome to React!!"));
     };
-	
     return Hello;
 }(React.Component));
 exports.Hello = Hello;
-	
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
+
 
 /***/ }),
 
