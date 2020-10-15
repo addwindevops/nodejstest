@@ -9,9 +9,10 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="./node_module/fhirclient/build/fhir-client.js"></script>
+	 <script src="./dist/app-bundle.js"></script> 
 
 </head>
-<body>
+<body ng-app="App-bundle">
     <script>
         FHIR.oauth2.ready()
             .then(client => client.request("Patient"))
@@ -19,11 +20,6 @@
             .catch(console.error);
     </script>
     <div id="root"></div>
-    <!-- scripts -->
-    <script src="./dist/app-bundle.js"></script> 
-    <div class="alert alert-danger" role="alert" ng-show="StartupErrorMessage">
-		{{ StartupErrorMessage }}
-	</div>
 
 	<div class="container-fluid full-height">
 
