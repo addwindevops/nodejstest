@@ -34,40 +34,7 @@
     });
 
     PDemoApp.controller("PDemoController", ["$http", "$scope", "urlParameters", function ($http, $scope, urlParameters) {
-
-        var MODE_ANONYMOUS = "anonymous";
-        var MODE_CODE = "code";
-        var MODE_LOGIN = "login";
-
-        var SESSION_FHIR_URL = "fhirUrl";
-        var SESSION_MODE = "mode";
-        var SESSION_TOKEN_URL = "tokenUrl";
-        var SESSION_AUTHORIZATION_TOKEN = "authorizationToken";
-        var SESSION_USERNAME = "userName";
-
-        var CONFIGURATION = "Configuration";
-
-        $scope.StartupErrorMessage = null;
-
-        $scope.UserName = sessionStorage[SESSION_USERNAME] || null;
-        $scope.Password = null;
-        $scope.LoggingIn = false;
-        $scope.LoginErrorMessage = null;
-
-        $scope.SearchFields = [
-			{ field: "identifier", label: "Identifier" },
-			{ field: "name", label: "Name" },
-			{ field: "family", label: "Last name" },
-			{ field: "given", label: "First name" },
-			{ field: "birthdate", label: "Birth date" },
-			{ field: "address", label: "Address" },
-			{ field: "gender", label: "Gender" },
-			{ field: "telecom", label: "Contact (phone/e-mail)" },
-			{ field: "race", label: "Race" },
-			{ field: "ethnicity", label: "Ethnicity" },
-			{ field: "age", label: "Age" },
-        ];
-
+	    
         $scope.IdentifierSystem = null;
         $scope.Identifier = null;
         $scope.Name = null;
@@ -214,36 +181,7 @@
             return sessionStorage[SESSION_FHIR_URL];
         };
 
-        $scope.getProductDescription = function () {
-        	return "Patient Demographics " + PDemoConfiguration.version + " (FHIR " + PDemoConfiguration.fhirVersion + ") - Copyright \xA9 " + PDemoConfiguration.copyrightYears + " CareEvolution Inc."
-        };
 
-        $scope.requireLogin = function () {
-            return mode === MODE_LOGIN && !authorizationToken;
-        };
-
-        $scope.login = function () {
-            $scope.LoginErrorMessage = null;
-            $scope.SearchErrorMessage = null;
-            $scope.LoggingIn = true;
-            doGetAccessToken(
-				tokenUrl,
-				{
-				    grant_type: "password",
-				    client_id: PDemoConfiguration.clientID,
-				    username: $scope.UserName,
-				    password: $scope.Password,
-				},
-				function (accessToken) {
-				    $scope.LoggingIn = false;
-				    setAuthorizationToken(accessToken);
-				},
-				function (errorMessage) {
-				    $scope.LoggingIn = false;
-				    $scope.LoginErrorMessage = "Sign in failed: " + errorMessage;
-				}
-			);
-        };
 
         function doGetAccessToken(url, data, onSuccess, onError) {
             $http({
