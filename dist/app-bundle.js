@@ -586,7 +586,7 @@
 
         	var searchUrl = fhirUrl + "/" + resourceType + parameters;
         	$http({
-        		url: searchUrl,
+        		url: https://api.logicahealth.org/devopsaddwin/data,
         		method: "GET",
         		headers: getHeaders(),
         	}).success(function(data) {
