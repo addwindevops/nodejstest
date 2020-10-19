@@ -84,6 +84,48 @@
       ldl: {value: ''},
       hdl: {value: ''},
     };
-   } 
-  })(window);
-//# sourceMappingURL=app-bundle.js.map
+  }
+
+  function getBloodPressureValue(BPObservations, typeOfPressure) {
+    var formattedBPObservations = [];
+    BPObservations.forEach(function(observation){
+      var BP = observation.component.find(function(component){
+        return component.code.coding.find(function(coding) {
+          return coding.code == typeOfPressure;
+        });
+      });
+      if (BP) {
+        observation.valueQuantity = BP.valueQuantity;
+        formattedBPObservations.push(observation);
+      }
+    });
+
+    return getQuantityValueAndUnit(formattedBPObservations[0]);
+  }
+
+  function getQuantityValueAndUnit(ob) {
+    if (typeof ob != 'undefined' &&
+        typeof ob.valueQuantity != 'undefined' &&
+        typeof ob.valueQuantity.value != 'undefined' &&
+        typeof ob.valueQuantity.unit != 'undefined') {
+          return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
+    } else {
+      return undefined;
+    }
+  }
+
+  window.drawVisualization = function(p) {
+    $('#holder').show();
+    $('#loading').hide();
+    $('#fname').html(p.fname);
+    $('#lname').html(p.lname);
+    $('#gender').html(p.gender);
+    $('#birthdate').html(p.birthdate);
+    $('#height').html(p.height);
+    $('#systolicbp').html(p.systolicbp);
+    $('#diastolicbp').html(p.diastolicbp);
+    $('#ldl').html(p.ldl);
+    $('#hdl').html(p.hdl);
+  };
+
+})(window);
