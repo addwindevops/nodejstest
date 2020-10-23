@@ -13,11 +13,6 @@
 
 </head>
 <body>
-        <h4>Current Patient</h4>
-        <div id="patient">Loading...</div>
-        <br/>
-        <h4>Medications</h4>
-        <div id="meds">Loading...</div>
         <script type="text/javascript">
             FHIR.oauth2.ready().then(function(client) {
 
@@ -34,7 +29,7 @@
                 // Get MedicationRequests for the selected patient
                 client.request("/MedicationRequest?patient=" + client.patient.id, {
                     resolveReferences: [ "medicationReference" ],
-                    graph: true
+                    //graph: true
                 })
 
                 // Reject if no MedicationRequests are found
@@ -44,7 +39,7 @@
                     }
                     return data.entry;
                 })
-     // Render the current patient's medications (or any error)
+                // Render the current patient's medications (or any error)
                 .then(
                     function(meds) {
                         document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
@@ -54,6 +49,32 @@
                     }
                 );
                    }).catch(console.error);
+            
+            
+            // Get Encounter for the selected patient
+                client.request("/Encounter?patient=" + client.patient.id, {
+                    resolveReferences: [ "encounter" ],
+                    graph: true
+                })
+
+                // Reject if no Encounters are found
+                .then(function(data) {
+                    if (!data.entry || !data.entry.length) {
+                        throw new Error("No encounters found for the selected patient");
+                    }
+                    return data.entry;
+                })
+            // Render the current patient's encounters (or any error)
+                .then(
+                    function(encounter) {
+                        document.getElementById("encounter").innerText = JSON.stringify(meds, null, 4);
+                    },
+                    function(error) {
+                        document.getElementById("encounter").innerText = error.stack;
+                    }
+                );
+                   }).catch(console.error);
+
         </script>
     </body>
 </html>
